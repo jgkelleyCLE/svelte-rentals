@@ -143,9 +143,9 @@
             <form class="flex flex-col items-center w-full" onsubmit={submitHandler}>
                 <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Event Title' type="text" bind:value={title} />
                     
-                    <p>Date of event:</p>
+                    <p>Date of event: </p>
                     
-                        <input type="date" bind:value={selected} />
+                        <input type="date" id="dateInput" bind:value={selected} class="w-full p-2 border-2 dark:border-gray-300 border-gray-500 rounded-md" />
 
                     <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Your email address' type="text" bind:value={email}  />
                     <button class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md" type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button>

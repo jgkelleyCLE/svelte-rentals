@@ -15,7 +15,7 @@
           return
         }else {
           cartActions.addToCart({...product, cartQuantity: quantity})
-          toast.success("Item added to cart")
+          toast.success(`${quantity} - ${product.product}${quantity > 1 ? 's' : ''} added to cart`)
         }
     }
 
@@ -41,7 +41,7 @@
           <h1 class="text-gray-600 dark:text-gray-300 font-semibold my-4">${product?.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
           
           
-          <input class="w-full max-w-[300px] p-2 text-black font-bold text-xl rounded-md dark:bg-gray-400" placeholder="Qty" bind:value={quantity} />
+          <input type="number" class="w-full max-w-[300px] p-2 text-black font-bold text-xl rounded-md dark:bg-gray-400" placeholder="Qty" bind:value={quantity} />
           <button class='w-full max-w-[300px] bg-green-400 hover:bg-green-500 font-bold p-2 rounded-md mt-2 transition duration-300' onclick={()=> cartHandler(product)}> Add to Cart</button>
           
         </div>
