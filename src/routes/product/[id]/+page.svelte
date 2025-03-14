@@ -1,0 +1,50 @@
+<script>
+    let { data } = $props()
+    const { product } = data
+    console.log(product)
+    import { cartActions } from '$lib/stores/cartStore'
+	import { toast } from 'svelte-sonner';
+
+
+    let quantity = $state(1);
+
+    const cartHandler = () => {
+        console.log(quantity)
+        if(quantity === "" || quantity === 0){
+          toast.error("Please enter a valid quantity")
+          return
+        }else {
+          cartActions.addToCart({...product, cartQuantity: quantity})
+          toast.success("Item added to cart")
+        }
+    }
+
+    const title = `${product?.product} | Svelte Rentals`
+
+</script>
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
+
+
+<div class="mt-20 mx-auto w-11/12">
+
+    <div class="flex gap-2 mt-2 flex-col lg:flex-row items-start  ">
+        <!-- LEFT SIDE  -->
+        <div class="lg:w-1/2 w-full  ">
+          <img width={1000} height={600} class="w-full rounded-md max-h-[700px] object-contain" src={product?.image} alt={product?.product} />
+        </div>
+  
+        <!-- RIGHT SIDE  -->
+        <div class=" flex flex-col items-start p-4 rounded-md bg-gray-200 dark:bg-gray-600 max-h-[600px] lg:w-1/2 w-full">
+          <h1 class="text-2xl font-bold">{product?.product}</h1>
+          <h1 class="text-gray-600 dark:text-gray-300 font-semibold my-4">${product?.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
+          
+          
+          <input class="w-full max-w-[300px] p-2 text-black font-bold text-xl rounded-md dark:bg-gray-400" placeholder="Qty" bind:value={quantity} />
+          <button class='w-full max-w-[300px] bg-green-400 hover:bg-green-500 font-bold p-2 rounded-md mt-2 transition duration-300' onclick={()=> cartHandler(product)}> Add to Cart</button>
+          
+        </div>
+      </div>
+
+</div>
