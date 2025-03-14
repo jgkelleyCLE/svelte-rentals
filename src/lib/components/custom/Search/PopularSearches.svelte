@@ -41,5 +41,5 @@ const getTopSearchTerms = (searches, limit = 10) => {
     </div>
 
     {/each}
-    <button onclick={()=> goto('/admin/all-searches')} class="bg-safariOrange dark:bg-safariOrangeHover text-white w-full mt-1 font-bold p-2 rounded-md">View All Searches</button>
+    <button aria-label="View all Searches" onclick={()=> goto('/admin/all-searches')} class="bg-safariOrange dark:bg-safariOrangeHover text-white w-full mt-1 font-bold p-2 rounded-md">View All Searches</button>
 </div>

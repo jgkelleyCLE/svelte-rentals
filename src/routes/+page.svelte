@@ -52,15 +52,26 @@
     });
 
 	const title = "Svelte Rentals"
+	const metaDescription = "Find everything you need for your event. We offer rental equipment for corporate events, weddings, church picnics, graduations and more. Simply the best Cleveland tent, table, and chair rental!"
+
 
 </script>
 
-<title>{title}</title>
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={metaDescription} />
+</svelte:head>
+	
 
 <!-- PAGE CONTAINER -->
 <div class="flex items-center justify-center w-full h-[100vh] relative">
 	
-	<img src={homeImages[currentImageIndex]} alt="Home Images" class="w-full h-[100vh] object-cover absolute top-0 left-0 select-none pointer-events-none z-10" />
+	<img 
+	width="1200" 
+	height="800" 
+	src={homeImages[currentImageIndex]} 
+	alt="Home Images" 
+	class="w-full h-[100vh] object-cover absolute top-0 left-0 select-none pointer-events-none z-10" />
 
 	<!-- IMAGE OVERLAY -->
 	<div class="absolute top-0 left-0 w-full h-[100vh] bg-black/55 z-10">

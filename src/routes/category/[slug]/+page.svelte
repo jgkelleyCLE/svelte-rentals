@@ -2,7 +2,6 @@
     import { navigating } from '$app/stores';
 	import ProductCard from '$lib/components/custom/Products/ProductCard.svelte';
     let { data } = $props();
-    console.log(data)
 
     let isLoading = $state(true)
 

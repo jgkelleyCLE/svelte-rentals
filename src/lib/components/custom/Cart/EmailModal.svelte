@@ -9,13 +9,9 @@
 	import { goto } from "$app/navigation";
 
     const cartItems = derived(cart, $cart => $cart.cartList)
-    console.log($cartItems)
 
     let { subtotal, taxPrice, deliveryFee, total } = $props()
-    console.log("SUBTOTAL: ", $subtotal)
-    console.log("TAX: ", $taxPrice)
-    console.log(deliveryFee)
-    console.log("TOTAL: ", $total)
+    
 
     let open = $state(false);
 
@@ -56,6 +52,9 @@
                     email = ''
                     selected = ''
                     goto('/thank-you')
+
+                    //CLEAR CART ON SUCCESSFUL ORDER
+                    cartActions.clearCart()
                 },
                 onError: (error) => {
                     toast.error("Error creating order")
@@ -148,7 +147,7 @@
                         <input type="date" id="dateInput" bind:value={selected} class="w-full p-2 border-2 dark:border-gray-300 border-gray-500 rounded-md" />
 
                     <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Your email address' type="text" bind:value={email}  />
-                    <button class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md" type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button>
+                    <button aria-label="Submit Quote" class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md" type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button>
                 </form>
 
         </div>

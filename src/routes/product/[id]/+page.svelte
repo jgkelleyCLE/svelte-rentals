@@ -1,7 +1,6 @@
 <script>
     let { data } = $props()
     const { product } = data
-    console.log(product)
     import { cartActions } from '$lib/stores/cartStore'
 	import { toast } from 'svelte-sonner';
 
@@ -9,7 +8,6 @@
     let quantity = $state(1);
 
     const cartHandler = () => {
-        console.log(quantity)
         if(quantity === "" || quantity === 0){
           toast.error("Please enter a valid quantity")
           return
@@ -42,7 +40,7 @@
           
           
           <input type="number" class="w-full max-w-[300px] p-2 text-black font-bold text-xl rounded-md dark:bg-gray-400" placeholder="Qty" bind:value={quantity} />
-          <button class='w-full max-w-[300px] bg-green-400 hover:bg-green-500 font-bold p-2 rounded-md mt-2 transition duration-300' onclick={()=> cartHandler(product)}> Add to Cart</button>
+          <button aria-label={`Add ${product.title} to cart`} class='w-full max-w-[300px] bg-green-400 hover:bg-green-500 font-bold p-2 rounded-md mt-2 transition duration-300' onclick={()=> cartHandler(product)}> Add to Cart</button>
           
         </div>
       </div>

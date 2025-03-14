@@ -50,7 +50,7 @@
     
     <h1 class="text-2xl">Cart</h1>
    
-    <div class="flex flex-col md:flex-row md:items-start items-center w-11/12 max-w-[1600px]">
+    <div class="flex flex-col md:flex-row md:items-start items-center w-full max-w-[1600px]">
 
         <!-- LEFT SIDE -->
         <div class="w-[95%] md:w-[65%] mx-4">
@@ -63,17 +63,17 @@
                       <h1 class="text-xl font-bold cursor-pointer" onClick={()=> router.push(`/product/${item._id}`)}>{item.product}</h1>
                       <h1 class="text-lg font-semibold text-gray-600 dark:text-gray-400">${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                       <div class="flex items-center gap-2">
-                      <button onclick={()=> decreaseQuantity(item)}><MinusIcon icon="mynaui:minus" /></button>
+                      <button aria-label="decrease quantity" onclick={()=> decreaseQuantity(item)}><MinusIcon icon="mynaui:minus" /></button>
                       <h1 class="w-[50px] border-2 border-gray-400 px-2 rounded-md">{item.cartQuantity}</h1>
                       
-                      <button onclick={()=> increaseQuantity(item)}><PlusIcon icon="mynaui:plus" /></button>
+                      <button aria-label="increase quantity" onclick={()=> increaseQuantity(item)}><PlusIcon icon="mynaui:plus" /></button>
                       
                     </div>
                     
                     </div>
                     
                 </div>
-                <button onclick={(e) => {
+                <button aria-label={`Remove ${item.title} from cart`} onclick={(e) => {
                         e.stopPropagation(); // Prevent event from bubbling up to the parent div
                         removeHandler(item);
                       }}><RemoveIcon icon="streamline:delete-1" class=" absolute -top-1 -right-1 z-40 hover:text-white transition duration-300 dark:bg-white bg-red-500 rounded-full w-6 h-6 p-1 dark:text-red-500 text-white dark:hover:bg-red-500 hover:bg-red-500 dark:hover:text-white" />
@@ -82,7 +82,7 @@
             </div>
             {/each}
             <div class="flex justify-end">
-                <button class="bg-safariOrange hover:bg-safariOrangeHover p-2 px-6 rounded-md text-white transition duration-300 font-bold mt-2 mb-2" onclick={()=> cartActions.clearCart()}>Clear Cart</button>
+                <button aria-label="Remove all items from cart" class="bg-safariOrange hover:bg-safariOrangeHover p-2 px-6 rounded-md text-white transition duration-300 font-bold mt-2 mb-2" onclick={()=> cartActions.clearCart()}>Clear Cart</button>
             </div>
 
         </div>
@@ -91,7 +91,7 @@
 
         <!-- RIGHT SIDE -->
 
-        <div class="w-[95%] md:w-[30%] flex flex-col items-start gap-1 p-3 shadow-md shadow-black/20 md:mr-4 rounded-md bg-gray-200 dark:bg-gray-600">
+        <div class="w-[95%] md:w-[35%] flex flex-col items-start gap-1 p-3 shadow-md shadow-black/20  rounded-md bg-gray-200 dark:bg-gray-600 mt-1.5">
             <h1>Subtotal: ${$subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             <h1>Estimated Delivery: ${deliveryFee}</h1>
             <h1>Tax: ${$taxPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>

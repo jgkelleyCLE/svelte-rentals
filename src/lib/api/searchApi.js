@@ -19,7 +19,6 @@ export const createSearch = async(data) => {
 export const getAllSearches = async() => {
 
   const response = await fetch(`${API_BASE_URL}/api/search`);
-  // console.log("RESPONSE IN SEARCH API", response.json())
   const data = response.json();
 
   if (!response.ok) {

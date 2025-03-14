@@ -67,7 +67,7 @@ import RemoveIcon from '@iconify/svelte'
           </div>
           
       </a>
-      <button onclick={(e) => {
+      <button aria-label="Open Cart" onclick={(e) => {
         e.stopPropagation(); // Prevent event from bubbling up to the parent div
         removeHandler(item);
       }}><RemoveIcon icon="streamline:delete-1" class=" absolute top-0 right-0 z-40 hover:text-white transition duration-300 bg-white rounded-full w-6 h-6 p-1 text-red-500 hover:bg-red-500" />
@@ -81,7 +81,7 @@ import RemoveIcon from '@iconify/svelte'
         <div class="absolute bottom-0 right-0 w-full p-4 bg-background flex flex-col items-end">
           
           <h1 class="text-2xl ">Subtotal: ${$subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
-          <button class="bg-safariOrange text-white p-2 rounded-md mt-2 px-4" onclick={() => {
+          <button aria-label="View Quote" class="bg-safariOrange text-white p-2 rounded-md mt-2 px-4" onclick={() => {
             open = false;
             goto('/cart');
           }}>View Quote</button>

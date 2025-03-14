@@ -1,7 +1,6 @@
 export const load = async({ url }) => {
     const query = url.searchParams.get('q') || ""
 
-    console.log('query', query)
 
     let products = []
 
@@ -17,7 +16,6 @@ export const load = async({ url }) => {
             
             products = await response.json();
             
-            console.log(`Found ${products.length} products for query "${query}"`);
         } catch (error) {
             console.error('Search API error:', error);
             // Return the error to be handled in the component

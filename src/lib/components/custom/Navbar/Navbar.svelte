@@ -14,7 +14,7 @@
     </div>
     <div class="relative">
     <a href="/" aria-label="Tentlify Home">
-        <img width={200} height={100} src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/Tenlify_Logo_Thin_Small.png?alt=media&token=59587449-7b7c-439f-a434-5b4059035b11" alt="TentlifyLogo" class="w-32 md:w-44 h-full" />
+        <img width="200" height="100" src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/Tenlify_Logo_Thin_Small.png?alt=media&token=59587449-7b7c-439f-a434-5b4059035b11" alt="TentlifyLogo" class="w-32 md:w-44 h-full" />
         <SvelteIcon icon="devicon:svelte" class="absolute top-6 right-0 w-5 h-5 md:top-10 md:-right-2 z-20 md:h-8 md:w-8 opacity-75" />
     </a>
     </div>

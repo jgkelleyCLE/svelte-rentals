@@ -1,9 +1,7 @@
 <script>
 
     let { data } = $props()
-    // console.log(data)
     let searchTerm = data
-    console.log("SEARCH TERM: ", searchTerm)
 
 const title = 'Search Details | Svelte Rentals'
 </script>

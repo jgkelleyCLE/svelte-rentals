@@ -26,6 +26,6 @@ let { item } = $props();
                         </div>
                         <h1 class="font-semibold text-gray-400 -mt-1">${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
                         
-                        <button class="bg-primary text-secondary p-2 rounded-md hover:bg-primary/70 transition duration-300 w-full font-bold" onclick={()=> goto(`/product/${item._id}`)}>View Product</button>
+                        <button aria-label="View Product" class="bg-primary text-secondary p-2 rounded-md hover:bg-primary/70 transition duration-300 w-full font-bold" onclick={()=> goto(`/product/${item._id}`)}>View Product</button>
         </div>
     </div>

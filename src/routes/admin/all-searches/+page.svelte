@@ -7,7 +7,6 @@
     let { data } = $props()
     const searches = data.searches
 
-    console.log(searches)
     
 
 </script>

@@ -1,36 +1,24 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { defineConfig } from 'vite';
 import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
-	plugins: [sveltekit(),
-		// Icons({
-		// 	compiler: 'svelte',
-		// 	autoInstall: true,
-		//   })
+	plugins: [
+        sveltekit(),
+        enhancedImages(),
 	],
-	optimizeDeps: {
+    optimizeDeps: {
         // Tell Vite to process Svelte files in node_modules
-        include: ['@tanstack/svelte-query']
-    },
-	optimizeDeps: {
-        // Tell Vite to process Svelte files in node_modules
-        include: ['svelte-sonner']
-    },
-	optimizeDeps: {
-        // Tell Vite to process Svelte files in node_modules
-        include: ['layerchart']
-    },
-	optimizeDeps: {
-        // Tell Vite to process Svelte files in node_modules
-        include: ['d3-array']
-    },
-	optimizeDeps: {
-        // Tell Vite to process Svelte files in node_modules
-        include: ['d3-scale']
-    },
-	optimizeDeps: {
-		include: ['svelte-maplibre', 'maplibre-gl'],
-		exclude: []
-	  },
+        include: [
+            '@tanstack/svelte-query',
+            'svelte-sonner',
+            'layerchart',
+            'd3-array',
+            'd3-scale',
+            'svelte-maplibre', 
+            'maplibre-gl'
+        ],
+        exclude: []
+    }
 });

@@ -3,8 +3,6 @@ export const sendEmail = async(cartList, subtotal, deliveryFee, taxPrice, total,
 
     try {
 
-        console.log("SEND EMAIL DATA: ", { cartList, subtotal, deliveryFee, taxPrice, total, email, selected, title })
-
     const response = await fetch(`https://tentlify-ecom.up.railway.app/api/mail/send`, {
         method: 'POST',
         headers: {

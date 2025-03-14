@@ -6,7 +6,6 @@ import { scaleBand } from 'd3-scale';
 import { scaleLinear } from 'd3-scale';
 let { searches } = $props()
 
-console.log("SEARCHES IN SEARCH CHART: ", searches)
 
 const getTopSearchTerms = (searches) => {
         if (!searches || !searches.length) return []

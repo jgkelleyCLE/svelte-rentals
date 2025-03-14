@@ -9,7 +9,7 @@ import Sun from "lucide-svelte/icons/sun";
 </script>
 
 
-<Button onclick={toggleMode} variant="outline" size="icon">
+<Button aria-label="Toggle Theme" onclick={toggleMode} variant="outline" size="icon">
     <Sun
       class="h-[1.2rem] w-[1.2rem] text-black rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
     />

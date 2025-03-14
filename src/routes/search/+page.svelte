@@ -12,7 +12,6 @@
     const searchMutation = createMutation({
     mutationFn: (searchData) => createSearch(searchData),
     onSuccess: (data) => {
-      console.log("Search record created successfully:", data);
     },
     onError: (error) => {
       console.error("Error creating search record:", error);
@@ -24,8 +23,6 @@
         if (data.query) {
             // Extract product IDs
             const resultIds = data.products.map(product => product._id);
-
-            console.log("RESULT IDs:", resultIds);
             
             // Create search record payload
             const searchData = {
@@ -39,9 +36,6 @@
         }
     });
 
-  
-
-    console.log(data)
 
     $inspect(data.query)
 </script>

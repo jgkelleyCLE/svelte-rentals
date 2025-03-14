@@ -38,7 +38,7 @@ const mobileMenuLinks = [
 
 
 <Sheet.Root bind:open={open}>
-    <Sheet.Trigger>
+    <Sheet.Trigger aria-label="Open navigation menu" aria-expanded={open}>
         <MenuIcon icon="mdi:menu" class="w-8 h-8 text-white md:hidden" />
     </Sheet.Trigger>
     <Sheet.Content side="left">
@@ -52,7 +52,7 @@ const mobileMenuLinks = [
         </div>
 
         {#each mobileMenuLinks as item}
-        <button key={item.id} class="relative w-full" onclick={()=> navigationHandler(item)}>
+        <button aria-label={`Navigate to ${item.title}`} key={item.id} class="relative w-full" onclick={()=> navigationHandler(item)}>
             <div class="bg-black/40 inset-0 absolute z-20 top-0 left-0 w-full"></div>
             <img alt={item.title} src={item.image} priority class="w-full h-[100px] object-cover z-10 rounded-md" />
             <h1 class="text-white text-2xl font-bold absolute left-2 bottom-0 z-30">{item.title}</h1>
@@ -61,7 +61,7 @@ const mobileMenuLinks = [
         {/each}
 
         <!-- LOCATION BUTTON -->
-        <button class="relative w-full" onclick={()=> {
+        <button aria-label="Navigate to Location Page" class="relative w-full" onclick={()=> {
             goto('/location')
             open = false
         }}>
@@ -71,7 +71,7 @@ const mobileMenuLinks = [
 </button>
 
 <!-- GALLERY BUTTON -->
-        <button class="relative w-full" onclick={()=> {
+        <button aria-label="Navigate to Gallery Page" class="relative w-full" onclick={()=> {
             goto('/gallery')
             open = false
         }}>
