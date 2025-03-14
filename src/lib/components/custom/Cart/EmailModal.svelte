@@ -1,7 +1,6 @@
 <script>
 	import { sendEmail } from "$lib/api/emailApi";
     import * as Dialog from "$lib/components/ui/dialog";
-    import DayPicker, { Mode } from 'svelte-day-picker';
 	import { toast } from "svelte-sonner";
     import { cart, cartActions } from "$lib/stores/cartStore";
 	import { derived } from "svelte/store";
@@ -145,11 +144,8 @@
                 <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Event Title' type="text" bind:value={title} />
                     
                     <p>Date of event:</p>
-                    <DayPicker
-                        bind:selected={selected}
-                        
-                        />
-                        <!-- <input type="date" bind:value={selected} /> -->
+                    
+                        <input type="date" bind:value={selected} />
 
                     <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Your email address' type="text" bind:value={email}  />
                     <button class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md" type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button>

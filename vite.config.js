@@ -19,10 +19,6 @@ export default defineConfig({
     },
 	optimizeDeps: {
         // Tell Vite to process Svelte files in node_modules
-        include: ['svelte-day-picker']
-    },
-	optimizeDeps: {
-        // Tell Vite to process Svelte files in node_modules
         include: ['layerchart']
     },
 	optimizeDeps: {
