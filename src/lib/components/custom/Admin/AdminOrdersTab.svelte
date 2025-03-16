@@ -33,10 +33,10 @@ onMount(async()=> {
         <Table.Header>
           <Table.Row>
             <Table.Head>Title</Table.Head>
-            <Table.Head>Created</Table.Head>
+            <Table.Head class="hidden md:table-cell">Created</Table.Head>
             <Table.Head class="hidden md:table-cell">Event Date</Table.Head>
             <Table.Head>Status</Table.Head>
-            <Table.Head>Amount</Table.Head>
+            <Table.Head class="hidden md:table-cell">Amount</Table.Head>
             <Table.Head>Link</Table.Head>
           </Table.Row>
         </Table.Header>
@@ -45,10 +45,10 @@ onMount(async()=> {
             {#each orders as item}
           <Table.Row key={item._id}>
             <Table.Cell class="font-medium">{item.title}</Table.Cell>
-            <Table.Cell>{new Date(item.createdAt).toLocaleDateString()}</Table.Cell>
-            <Table.Cell className="hidden md:table-cell">{new Date(item.eventDate).toLocaleDateString()}</Table.Cell>
+            <Table.Cell class="hidden md:table-cell">{new Date(item.createdAt).toLocaleDateString()}</Table.Cell>
+            <Table.Cell class="hidden md:table-cell">{new Date(item.eventDate).toLocaleDateString()}</Table.Cell>
             <Table.Cell><OrderStatusSelect item={item} /></Table.Cell>
-            <Table.Cell>${item.totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Table.Cell>
+            <Table.Cell class="hidden md:table-cell">${item.totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Table.Cell>
             <Table.Cell><a href={`/orders/${item._id}`} class="text-blue-500">View</a></Table.Cell>
           </Table.Row>
           {/each}

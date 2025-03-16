@@ -26,7 +26,7 @@ const products = createQuery({
             <Table.Head>Product</Table.Head>
             <Table.Head class="hidden md:table-cell">Category</Table.Head>
             <Table.Head>Status</Table.Head>
-            <Table.Head>Amount</Table.Head>
+            <Table.Head class="hidden md:table-cell">Amount</Table.Head>
             <Table.Head>Edit</Table.Head>
           </Table.Row>
         </Table.Header>
@@ -49,7 +49,7 @@ const products = createQuery({
               <Table.Cell>
                 <ProductStatusSelect item={item} />
                 </Table.Cell>
-              <Table.Cell textAlign="end" className="hidden md:table-cell">
+              <Table.Cell textAlign="end" class="hidden md:table-cell">
                 ${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </Table.Cell>
               

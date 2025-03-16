@@ -41,10 +41,10 @@ const getTopSearchTerms = (searches) => {
     }
   },
   
-  tooltip: {
-    grouping: false
-  },
-  height: '400px',
+  // tooltip: {
+  //   grouping: false
+  // },
+  // height: '400px',
   accessibility: {
     svgAriaLabel: 'Bar Chart of most popular searches'
   }
@@ -52,7 +52,7 @@ const getTopSearchTerms = (searches) => {
 
 </script>
 
-<div  class="h-[250px] md:h-[400px] m-2 p-2 border rounded text-gray-400">
+<div  class="h-[450px] md:h-[400px] m-2 p-2 border rounded text-gray-400">
     
     <!-- <BarChart 
     data={topSearches} 
