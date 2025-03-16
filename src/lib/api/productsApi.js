@@ -23,3 +23,20 @@ export const updateProductStatus = async(productId, status) => {
     })
 
 }
+
+export const editProduct = async(productId, tags) => {
+
+    const response = await fetch(`https://tentlify-ecom.up.railway.app/api/products/tags/${productId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ tags })
+    })
+    const data = await response.json()
+    if (!response.ok) {
+        throw new Error(data.message || 'Failed to update tags.');
+    }
+    return data
+
+}

@@ -14,6 +14,7 @@
 <div class="p-2 w-full flex flex-col h-[100%]">
     <!-- CHART CONTAINER -->
     <div class="w=full ">
+        <h1 class="text-2xl font-bold text-gray-700 dark:text-gray-400">Most Popular Searches</h1>
         <SearchChart searches={searches} />
     </div>
 

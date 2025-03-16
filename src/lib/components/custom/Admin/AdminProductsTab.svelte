@@ -5,6 +5,7 @@ import * as Table from "$lib/components/ui/table";
 	import ProductStatusSelect from "../Orders/ProductStatusSelect.svelte";
 	import { createQuery } from "@tanstack/svelte-query";
 	import PageSpinner from "../Misc/PageSpinner.svelte";
+	import EditProductModal from "../Products/EditProductModal.svelte";
 
 //FETCH DATA WITH SVELTE QUERY so we can invalidate the query and have the cell go to red without refreshing the page -- queryKey allows this
 const products = createQuery({
@@ -53,8 +54,11 @@ const products = createQuery({
                 </Table.Cell>
               
        
-              <Table.Cell textAlign="end">
+              <!-- <Table.Cell textAlign="end">
                 <a class="text-blue-500" href={`/product/${item._id}`}>View</a>
+                </Table.Cell> -->
+              <Table.Cell textAlign="end">
+                <EditProductModal item={item} />
                 </Table.Cell>
             </Table.Row>
           {/each}

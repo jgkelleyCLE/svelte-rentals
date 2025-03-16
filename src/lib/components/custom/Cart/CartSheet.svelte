@@ -45,7 +45,7 @@ import RemoveIcon from '@iconify/svelte'
         <Sheet.Description></Sheet.Description>
 
         <div 
-        class="flex-grow overflow-y-scroll py-2 pt-6 md:pt-1 mt-6 h-[500px] md:h-[800px] max-h-[100%] pb-4">
+        class="flex-grow overflow-y-scroll py-2 pt-6 md:pt-1 mt-6 h-[500px] md:h-[800px] max-h-[100%] pb-4 scrollable-content">
         {#if $cartItems.length === 0}
         <div class="flex flex-col items-center justify-center gap-2 h-[50vh]">
           <h1 class="text-2xl">Cart is empty</h1>
@@ -98,3 +98,17 @@ import RemoveIcon from '@iconify/svelte'
       {/if}
     </Sheet.Content>
   </Sheet.Root>
+
+
+<style>
+  /* Hide scrollbar but maintain functionality */
+  .scrollable-content {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+</style>

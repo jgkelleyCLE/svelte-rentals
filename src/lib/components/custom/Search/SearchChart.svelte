@@ -30,7 +30,7 @@ const getTopSearchTerms = (searches) => {
 
 
     const options = {
-        title: 'Most Popular Searches',
+        
   axes: {
     left: {
       mapsTo: 'count'
@@ -52,7 +52,7 @@ const getTopSearchTerms = (searches) => {
 
 </script>
 
-<div  class="h-[250px] md:h-[400px] m-2 p-2 border rounded">
+<div  class="h-[250px] md:h-[400px] m-2 p-2 border rounded text-gray-400">
     
     <!-- <BarChart 
     data={topSearches} 
