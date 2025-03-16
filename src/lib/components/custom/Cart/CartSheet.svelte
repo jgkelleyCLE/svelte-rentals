@@ -39,19 +39,26 @@ import RemoveIcon from '@iconify/svelte'
         <CartIcon icon="mdi:cart" class="w-8 h-8 text-white relative mr-3" />
         <span class="absolute top-1 right-3 bg-red-500 text-white rounded-full text-xs p-1 w-5 h-5 flex items-center justify-center">{$cartItems.length}</span>
     </Sheet.Trigger>
-    <Sheet.Content side="right" >
+    <Sheet.Content side="right" class="flex flex-col max-h-screen overflow-hidden" >
       <Sheet.Header>
         <Sheet.Title class="text-2xl">Cart</Sheet.Title>
         <Sheet.Description></Sheet.Description>
+
+        <div 
+        class="flex-grow overflow-y-scroll py-2 pt-6 md:pt-1 mt-6 h-[500px] md:h-[800px] max-h-[100%] pb-4">
         {#if $cartItems.length === 0}
         <div class="flex flex-col items-center justify-center gap-2 h-[50vh]">
-            <h1 class="text-2xl">Cart is empty</h1>
-            <a href="/product" class="bg-safariOrange hover:bg-safariOrangeHover p-2 px-6 rounded-md text-white transition duration-300 font-bold mt-8" >View Products</a>
+          <h1 class="text-2xl">Cart is empty</h1>
+          <button arai-label="View Products Page" href="/product" class="bg-safariOrange hover:bg-safariOrangeHover p-2 px-6 rounded-md text-white transition duration-300 font-bold mt-8" onclick={()=> {
+            open = false;
+            goto('/product');
+          }} >View Products</button>
         </div>
         {:else}
         
+        <!-- <div class="h-[800px] flex flex-col items-center gap-2 w-full overflow-y-scroll"> -->
         {#each $cartItems as item}
-        <div class="md:flex relative -my-6 w-full">
+        <div class="md:flex relative md:my-1 -my-5 w-full">
         <a href={`/product/${item._id}`} key={item.id} class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200 p-2 rounded-md flex items-center justify-start cursor-pointer hover:bg-gray-100 transition duration-300 w-full" 
         onclick={(e) => {
           e.preventDefault();
@@ -75,6 +82,7 @@ import RemoveIcon from '@iconify/svelte'
     </div>
         {/each}
         {/if}
+      </div>
       </Sheet.Header>
       {#if $cartItems.length > 0}
       <Sheet.Footer>

@@ -41,19 +41,24 @@ const mobileMenuLinks = [
     <Sheet.Trigger aria-label="Open navigation menu" aria-expanded={open}>
         <MenuIcon icon="mdi:menu" class="w-8 h-8 text-white md:hidden" />
     </Sheet.Trigger>
-    <Sheet.Content side="left">
+    <Sheet.Content side="left" class="bg-gray-200 dark:bg-background">
       <Sheet.Header>
         <Sheet.Title></Sheet.Title>
         <Sheet.Description class="hidden">
         </Sheet.Description>
         <div class="flex items-center justify-center relative">
-            <img src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/Tenlify_Logo_Thin_Small.png?alt=media&token=59587449-7b7c-439f-a434-5b4059035b11" alt="Tentlify Logo" class="w-[150px]" />
+            <button onclick={()=> {
+                goto('/')
+                open = false
+            }}><img src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/Tenlify_Logo_Thin_Small.png?alt=media&token=59587449-7b7c-439f-a434-5b4059035b11" alt="Tentlify Logo" class="w-[150px]" /></button>
             <SvelteIcon icon="devicon:svelte" class="absolute top-8 right-16 w-5 h-5 z-20 opacity-75" />
         </div>
 
+        <!-- SCROLL AREA -->
+        <div class="h-[500px] w-full overflow-y-scroll">
         {#each mobileMenuLinks as item}
         <button aria-label={`Navigate to ${item.title}`} key={item.id} class="relative w-full" onclick={()=> navigationHandler(item)}>
-            <div class="bg-black/40 inset-0 absolute z-20 top-0 left-0 w-full"></div>
+            <div class="bg-black/40 inset-0 rounded-md absolute z-20 top-0 left-0 w-full"></div>
             <img alt={item.title} src={item.image} priority class="w-full h-[100px] object-cover z-10 rounded-md" />
             <h1 class="text-white text-2xl font-bold absolute left-2 bottom-0 z-30">{item.title}</h1>
         </button>
@@ -65,7 +70,7 @@ const mobileMenuLinks = [
             goto('/location')
             open = false
         }}>
-  <div class="bg-black/30 inset-0 absolute z-20 top-0 left-0 w-full"></div>
+  <div class="bg-black/30 inset-0 rounded-md absolute z-20 top-0 left-0 w-full"></div>
 <img alt="Location" src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/Screenshot%202024-09-18%20at%205.35.50%E2%80%AFPM.png?alt=media&token=fa1d7420-d9e9-4189-9597-015c43fc5159" class="w-full h-[100px] object-cover z-10 rounded-md" />
 <h1 class="text-white text-2xl font-bold absolute left-2 bottom-0 z-30">Location</h1>
 </button>
@@ -75,10 +80,11 @@ const mobileMenuLinks = [
             goto('/gallery')
             open = false
         }}>
-  <div class="bg-black/30 inset-0 absolute z-20 top-0 left-0 w-full"></div>
+  <div class="bg-black/30 inset-0 rounded-md absolute z-20 top-0 left-0 w-full"></div>
 <img alt="Location" src="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/View%20recent%20photos.jpg?alt=media&token=ad5e25d9-63f9-43fb-8539-4c2a92004bd0" class="w-full h-[100px] object-cover z-10 rounded-md" />
 <h1 class="text-white text-2xl font-bold absolute left-2 bottom-0 z-30">Gallery</h1>
 </button>
+</div>
 
       </Sheet.Header>
     </Sheet.Content>
