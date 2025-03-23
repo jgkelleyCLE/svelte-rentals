@@ -54,9 +54,7 @@ const products = createQuery({
                 </Table.Cell>
               
        
-              <!-- <Table.Cell textAlign="end">
-                <a class="text-blue-500" href={`/product/${item._id}`}>View</a>
-                </Table.Cell> -->
+              
               <Table.Cell textAlign="end">
                 <EditProductModal item={item} />
                 </Table.Cell>
