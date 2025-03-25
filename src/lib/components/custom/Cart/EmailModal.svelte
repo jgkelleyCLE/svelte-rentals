@@ -1,156 +1,176 @@
 <script>
-	import { sendEmail } from "$lib/api/emailApi";
-    import * as Dialog from "$lib/components/ui/dialog";
-	import { toast } from "svelte-sonner";
-    import { cart, cartActions } from "$lib/stores/cartStore";
-	import { derived } from "svelte/store";
-	import { createOrder } from "$lib/api/ordersApi";
-	import { createMutation } from "@tanstack/svelte-query";
-	import { goto } from "$app/navigation";
+	import { sendEmail } from '$lib/api/emailApi';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { toast } from 'svelte-sonner';
+	import { cart, cartActions } from '$lib/stores/cartStore';
+	import { derived } from 'svelte/store';
+	import { createOrder } from '$lib/api/ordersApi';
+	import { createMutation } from '@tanstack/svelte-query';
+	import { goto } from '$app/navigation';
 
-    const cartItems = derived(cart, $cart => $cart.cartList)
+	const cartItems = derived(cart, ($cart) => $cart.cartList);
 
-    let { subtotal, taxPrice, deliveryFee, total } = $props()
-    
+	let { subtotal, taxPrice, deliveryFee, total } = $props();
 
-    let open = $state(false);
+	let open = $state(false);
 
-    let title = $state("");
-    let email = $state("");
-    let selected = $state()
-    $inspect(selected)
-   
+	let title = $state('');
+	let email = $state('');
+	let selected = $state();
+	$inspect(selected);
 
-    const emailHandler = (cart, $subtotal, deliveryFee, $taxPrice, $total, email, selected) => {
+	const emailHandler = (cart, $subtotal, deliveryFee, $taxPrice, $total, email, selected) => {
+		sendEmail({
+			cart: $cartItems,
+			$subtotal,
+			deliveryFee,
+			$taxPrice,
+			$total,
+			email,
+			selected,
+			title
+		});
 
-        
-        sendEmail({cart: $cartItems, $subtotal, deliveryFee, $taxPrice, $total, email, selected, title})
-        
-        open = false
-        title = ''
-       email = ''
-       selected = ''
-        toast.success("Email sent",)
+		open = false;
+		title = '';
+		email = '';
+		selected = '';
+		toast.success('Email sent');
+	};
 
-    }
+	const orderMutation = createMutation({
+		mutationFn: () =>
+			createOrder({
+				title,
+				cart: $cartItems,
+				eventDate: selected,
+				itemsPrice: $subtotal,
+				taxPrice: $taxPrice,
+				shippingPrice: deliveryFee,
+				totalPrice: $total,
+				orderStatus: 'Quote'
+			}),
+		onSuccess: () => {
+			toast.success('Order created successfully');
+			open = false;
+			title = '';
+			email = '';
+			selected = '';
+			goto('/thank-you');
 
-    const orderMutation = createMutation({
-                mutationFn: ()=> createOrder({
-                    title,       
-                    cart: $cartItems,
-                    eventDate: selected,
-                    itemsPrice: $subtotal,
-                    taxPrice: $taxPrice,
-                    shippingPrice: deliveryFee,  
-                    totalPrice: $total,
-                    orderStatus: 'Quote'
-                }),
-                onSuccess: ()=> {
-                    toast.success("Order created successfully")
-                    open = false
-                    title = ''
-                    email = ''
-                    selected = ''
-                    goto('/thank-you')
+			//CLEAR CART ON SUCCESSFUL ORDER
+			cartActions.clearCart();
+		},
+		onError: (error) => {
+			toast.error('Error creating order');
+			console.log('ORDER ERROR: ', error);
+		}
+	});
 
-                    //CLEAR CART ON SUCCESSFUL ORDER
-                    cartActions.clearCart()
-                },
-                onError: (error) => {
-                    toast.error("Error creating order")
-                    console.log("ORDER ERROR: ", error)
-                }
-            })
+	const emailMutation = createMutation({
+		mutationFn: (emailData) =>
+			sendEmail({
+				cart: $cartItems,
+				subtotal: $subtotal,
+				deliveryFee,
+				taxPrice: $taxPrice,
+				total: $total,
+				email,
+				selected,
+				title
+			}),
+		onSuccess: () => {
+			toast.success('Email sent successfully');
+		},
+		onError: (error) => {
+			toast.error('Error sending email');
+		}
+	});
 
-            const emailMutation = createMutation({
-                mutationFn: (emailData) => sendEmail({
-                    cart: $cartItems,
-                subtotal: $subtotal,
-                deliveryFee,
-                taxPrice: $taxPrice,
-                total: $total,
-                email,
-                selected,
-                title       
-            }),
-                onSuccess: ()=> {
-                    toast.success("Email sent successfully")
-                },
-                onError: (error) => {
-                    toast.error("Error sending email")
-                    
-                }
-            })
+	const submitHandler = (e) => {
+		e.preventDefault();
+		if (!title) {
+			toast.error('Title is required.');
+			return;
+		} else if (!email) {
+			toast.error('Email is required.');
+			return;
+		} else if (!selected) {
+			toast.error('Date is required.');
+			return;
+		} else {
+			$emailMutation.mutate({
+				cart: $cartItems.cart,
+				subtotal: $subtotal,
+				deliveryFee,
+				taxPrice: $taxPrice,
+				total: $total,
+				email,
+				selected,
+				title
+			});
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        if(!title){
-            toast.error("Title is required.")
-            return
-        }else if(!email){
-            toast.error("Email is required.")
-            return
-        }
-        else if(!selected){
-            toast.error("Date is required.")
-            return
-        }
-        else {
-            
-            
-            $emailMutation.mutate({
-                cart: $cartItems.cart,
-                subtotal: $subtotal,
-                deliveryFee,
-                taxPrice: $taxPrice,
-                total: $total,
-                email,
-                selected,
-                title
-            })
-
-            if(title && email){
-
-                $orderMutation.mutate({
-                    title,       
-                    cart: $cartItems,
-                    eventDate: selected,
-                    itemsPrice: $subtotal,
-                    taxPrice: $taxPrice,
-                    shippingPrice: deliveryFee,  
-                    totalPrice: $total,
-                    orderStatus: 'Quote'
-                })
-                
-                
-            }
-        }
-    }
-    
+			if (title && email) {
+				$orderMutation.mutate({
+					title,
+					cart: $cartItems,
+					eventDate: selected,
+					itemsPrice: $subtotal,
+					taxPrice: $taxPrice,
+					shippingPrice: deliveryFee,
+					totalPrice: $total,
+					orderStatus: 'Quote'
+				});
+			}
+		}
+	};
 </script>
 
-
 <Dialog.Root>
-    <Dialog.Trigger class="w-full">
-        <p class="bg-blue-500 hover:bg-blue-600 transition duration-300 p-2 rounded-md mt-2 mb-1 w-full text-white">Email Quote</p>
-    </Dialog.Trigger>
-    <Dialog.Content>
-      <Dialog.Header>
-        <Dialog.Title>Email Quote</Dialog.Title>
-        <Dialog.Description></Dialog.Description>
-        <div class="w-full flex i">
-            <form class="flex flex-col items-center w-full" onsubmit={submitHandler}>
-                <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Event Title' type="text" bind:value={title} />
-                    
-                    <p>Date of event: </p>
-                    
-                        <input type="date" id="dateInput" bind:value={selected} class="w-full p-2 border-2 dark:border-gray-300 border-gray-500 rounded-md" />
+	<Dialog.Trigger class="w-full">
+		<p
+			class="bg-blue-500 hover:bg-blue-600 transition duration-300 p-2 rounded-md mt-2 mb-1 w-full text-white"
+		>
+			Email Quote
+		</p>
+	</Dialog.Trigger>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Email Quote</Dialog.Title>
+			<Dialog.Description></Dialog.Description>
+			<div class="w-full flex i">
+				<form class="flex flex-col items-center w-full" onsubmit={submitHandler}>
+					<input
+						required
+						class="border-2 border-gray-300 p-2 rounded-md my-1 w-full"
+						placeholder="Event Title"
+						type="text"
+						bind:value={title}
+					/>
 
-                    <input required class="border-2 border-gray-300 p-2 rounded-md my-1 w-full" placeholder='Your email address' type="text" bind:value={email}  />
-                    <button aria-label="Submit Quote" class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md" type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button>
-                </form>
+					<p>Date of event:</p>
 
-        </div>
-      </Dialog.Header>
-    </Dialog.Content>
-  </Dialog.Root>
+					<input
+						type="date"
+						id="dateInput"
+						bind:value={selected}
+						class="w-full p-2 border-2 dark:border-gray-300 border-gray-500 rounded-md"
+					/>
+
+					<input
+						required
+						class="border-2 border-gray-300 p-2 rounded-md my-1 w-full"
+						placeholder="Your email address"
+						type="text"
+						bind:value={email}
+					/>
+					<button
+						aria-label="Submit Quote"
+						class="bg-safariOrange hover:bg-safariOrangeHover text-white w-full p-2 rounded-md"
+						type="submit">{orderMutation.isPending ? 'Submitting...' : 'Submit'}</button
+					>
+				</form>
+			</div>
+		</Dialog.Header>
+	</Dialog.Content>
+</Dialog.Root>
