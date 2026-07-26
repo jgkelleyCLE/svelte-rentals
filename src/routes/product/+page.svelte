@@ -17,7 +17,7 @@
 		/>
 		<CategoryCard
 			title="Tables"
-			image="https://d2j6dbq0eux0bg.cloudfront.net/images/648178/1143315935.jpg"
+			image="https://firebasestorage.googleapis.com/v0/b/mern-ecommerce-f07b1.appspot.com/o/tables_cover.jpg?alt=media&token=c2c3df97-9882-4e92-9303-9a6475a44977"
 		/>
 		<CategoryCard
 			title="Chairs"
